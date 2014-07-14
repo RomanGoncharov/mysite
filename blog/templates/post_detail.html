@@ -1,0 +1,73 @@
+{%  extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block extensions %}
+    {% load static %}
+{% endblock %}
+{% block content %}
+    <div class="container well-lg panel panel-primary">
+
+                <div class="page-title"> <h2> {{ post.title }} </h2> </div>
+                <h4> by  {{ post.author }} </h4>
+
+             <h5> <span class="glyphicon glyphicon-time"> </span> {{ post.timestamp }}</h5>
+             <p> {{ post.body }}</p>
+            {% if user == post.author %}
+             <div class="btn-group pull-right">
+{#                <button type="button" class="btn btn-primary" onclick="location.href='{% url 'blog:change_post' post.id %}' ">Update post</button>#}
+{#                <button type="button" class="btn btn-danger" onclick="location.href='{% url 'blog:delete_post' post.id %}' ">Delete post</button>#}
+             </div>
+            {% endif %}
+            <hr/>
+            <h4 >Comments({{ post.comments.count  }}):</h4>
+
+         {% for comment in post.comments.all %}
+                                <div class="row">
+                                    <div class="media well ">
+                                        <span class="glyphicon glyphicon-time"> </span> {{comment.sent_time}}
+                                        <div class="pull-left">
+                                            {% if comment.user.get_profile.avatar %}
+                                            <img width="150px" height="150px" class="media-object" alt="avatar" src="{{ comment.user.get_profile.avatar.avatar_size.url }}">
+                                            {% else %}
+                                                {% if comment.user.is_staff  %}
+                                                    <img width="75px" height="75px" class="media-object" alt="avatar" src="{%  static 'image/default.png' %}">
+                                                {% else %}
+                                                    <img width="75px" height="75px" class="media-object" alt="avatar" src="{%  static 'image/default.png' %}">
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading" id="comment_name">
+
+                                                    {% if comment.user.first_name != '' or comment.user.last_name != '' %}
+                                                            {{ comment.user.first_name }} {{ comment.user.last_name }}
+                                                    {% else %}
+                                                            {{ comment.user }}
+                                                    {% endif %}
+                                            </h4>
+                                           <p> {{ comment.comment }} </p>
+                                        </div>
+
+                                        <div class="pull-right">
+                                            <a onclick="like_request({{ comment.id }}); return false;">
+                                                <h3 class="glyphicon glyphicon-thumbs-up"></h3>
+                                                <span id="counter{{ comment.id }}">
+                                                    {{ comment.like}}
+                                                </span>
+                                                </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+         {% endfor %}
+
+
+            <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-lg-6 pull-left">
+                                {% crispy form  %}
+                            </div>
+                        </div>
+            </div>
+       </div>
+
+{% endblock %}

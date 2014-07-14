@@ -1,0 +1,17 @@
+{%  extends "base.html" %}
+{% block content %}
+
+
+    {%for User in object_list %}
+        <div class="container well-lg panel panel-primary">
+        {% ifequal user.username User.username %}
+                    <span class="glyphicon glyphicon-user"></span> <a href="{% url "blog:list" User.id %}" >{{User.username }} (It's you) </a>
+                     <br/>
+        {% else %}
+           <span class="glyphicon glyphicon-user"> </span><a href="{% url "blog:list" User.id %}"> {{User.username }} </a>
+            <br/>
+        {% endifequal %}
+        </div>
+    {% endfor %}
+
+{% endblock %}

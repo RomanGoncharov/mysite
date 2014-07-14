@@ -1,0 +1,21 @@
+{%  extends "registration/registration_base.html" %}
+
+{% block content %}
+      {% load static %}
+    <div  id=reg_complete>
+        <div class="panel panel-success">
+            <div class="panel-heading">Success!</div>
+            <div class="panel-body">
+
+                Registration completed!
+                <br/>
+                Check your e-mail to activate your account.
+                <a href="{% url 'authorisation:auth_login' %}" class="btn btn-primary pull-right">
+            Continue <span class="glyphicon glyphicon-hand-right"></span>
+        </a>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

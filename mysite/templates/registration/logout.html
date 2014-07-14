@@ -1,0 +1,17 @@
+{%  extends "registration/registration_base.html" %}
+
+{% block content %}
+    <div  id=reg_complete>
+        <div class="panel panel-success">
+            <div class="panel-heading">Success!</div>
+            <div class="panel-body">
+                 You have successfully logged out!
+                <a href="{% url 'authorisation:auth_login' %}" class="btn btn-primary pull-right">
+            Continue <span class="glyphicon glyphicon-hand-right"></span>
+        </a>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

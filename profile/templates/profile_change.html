@@ -1,0 +1,45 @@
+{%  extends "base.html" %}
+{% block title %}My blog!Profile{% endblock %}
+
+{% block link_extension %}
+    {% load static %}
+
+{% endblock %}
+
+{% block content %}
+  {% load crispy_forms_tags %}
+         {% crispy form  %}
+  <script>
+            function onFileSelect(e) {
+          var
+            f = e.target.files[0], // Первый выбранный файл
+            reader = new FileReader,
+            place = document.getElementById("previewImg"),
+            div_place = document.getElementById("div_preview_avatar") // Сюда покажем картинку
+          ;
+          reader.readAsDataURL(f);
+          reader.onload = function(e) { // Как только картинка загрузится
+            place.src = e.target.result;
+            div_place.hidden = ""
+          }
+        }
+
+        function BackgroundPreview(e) {
+          var
+            f = e.target.files[0], // Первый выбранный файл
+            reader = new FileReader,
+            place = document.body
+          ;
+          reader.readAsDataURL(f);
+          reader.onload = function(e) { // Как только картинка загрузится
+            place.background = e.target.result;
+          }
+        }
+        if(window.File && window.FileReader && window.FileList && window.Blob) {
+          document.getElementById("id_avatar").addEventListener("change", onFileSelect, false);
+          document.getElementById("id_background_img").addEventListener("change", BackgroundPreview, false);
+        } else {
+          console.warn( "Ваш браузер не поддерживает FileAPI")
+        }
+  </script>
+{% endblock %}

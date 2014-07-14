@@ -1,0 +1,4 @@
+Register on the site.
+To activate  your account you must go to this link:
+{{ site }}/accounts/activate/{{ activation_key }}/
+Thanks!

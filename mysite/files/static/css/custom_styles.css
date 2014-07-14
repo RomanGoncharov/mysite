@@ -1,0 +1,68 @@
+
+
+#info_user {
+    padding-left: 0px;
+}
+
+.media-heading {
+    color: #ffffff;
+}
+
+.container {
+    border-color: #bbdde8;
+    ;
+}
+
+#id_avatar {
+    padding: 1px;
+}
+
+.panel-primary {
+    background:#e7e7e7 ;
+}
+
+
+#id_change_post {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+#id_change_profile {
+    max-width: 330px;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+#id_registration {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+#reg_complete {
+    max-width: 400px;
+    padding: 15px;
+    margin: 0 auto;
+    margin-top: 45px;
+}
+
+#id_auth {
+     max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+#id_guestBut{
+    width: 135px;
+    margin-right: 70px;
+}
+
+#id_regBut{
+    width: 135px;
+    margin-left: 70px;
+}
+
+#comment_name{
+
+}

@@ -1,0 +1,5 @@
+Django==1.5.1
+django-registration==1.0
+django-crispy-forms==1.4.0
+django-pure-pagination
+PIL

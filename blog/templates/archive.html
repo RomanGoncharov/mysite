@@ -1,0 +1,59 @@
+{%  extends "base.html" %}
+{% block extensions %}
+    {% load static %}
+{% endblock %}
+{% block title %}My blog! {{user.username  }}{% endblock %}
+
+{% block content %}
+
+        <div class="media container" id="info_user">
+                <div class="pull-left">
+                    {% if author_post.get_profile.avatar %}
+                                <img class="img-thumbnail"  src="{{ author_post.get_profile.avatar.url }}"
+                                   alt="Avatar" width="140" id="id_avatar">
+                    {% else %}
+                                <img src="{% static 'image/default.png' %}" class="img-thumbnail"  alt="Avatar"
+                                        width="140" id="id_avatar">
+                    {% endif %}
+                </div>
+
+                <div class="media-body">
+                       <h4 class="media-heading">
+                          <ul>
+                              <p> First name: {{author_post.first_name }}</p>
+                              <p> Last name: {{author_post.last_name }}</p>
+                              <p> E-m@il: {{author_post.email  }}</p>
+                              <p> Phone number: {{author_post.get_profile.phone}}</p>
+                              <p> About user: {{author_post.get_profile.about_user}}</p>
+                          </ul>
+                       </h4>
+                </div>
+        </div>
+
+        {% for post in object_list %}
+           <div class="container well-lg panel panel-primary">
+
+                <div class="page-title"> <h2><a href="{% url 'blog:detail_post' post.id %}"> {{ post.title }} </a> </h2> </div>
+                <h4> by  {{ post.author }} </h4>
+
+             <h5> <span class="glyphicon glyphicon-time"> </span> {{ post.timestamp }}</h5>
+             <p> {{ post.body }}</p>
+           </div>
+
+            {% empty %}
+            <div class="col-md-4 col-md-offset-4">
+                    <div class="panel panel-danger">
+                            <div class="panel-heading"></div>
+                            <div class="panel-body">
+                               <b class="text-danger"> Nothing!!!</b>
+                            </div>
+                   </div>
+            </div>
+        {% endfor %}
+
+
+{% include "pagination.html" %}
+
+
+
+{% endblock %}
