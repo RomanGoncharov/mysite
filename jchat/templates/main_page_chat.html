@@ -1,0 +1,12 @@
+{%  extends "base.html" %}
+{% block extensions %}
+    {% load static %}
+{% endblock %}
+{% block title %}My chat!{% endblock %}
+
+{% block content %}
+    Rooms:
+    {% for room in rooms %}
+        {{ room.id }}
+    {% endfor %}
+{% endblock %}

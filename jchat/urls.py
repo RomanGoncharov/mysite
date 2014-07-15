@@ -7,7 +7,7 @@ URLConf for Chat.
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
-    url(r'^$', 'jchat.views.test'),
+    url(r'^$', 'jchat.views.main', name="main"),
     url(r'^send/$', 'jchat.views.send'),
     url(r'^receive/$', 'jchat.views.receive'),
     url(r'^sync/$', 'jchat.views.sync'),
