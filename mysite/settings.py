@@ -160,6 +160,8 @@ INSTALLED_APPS = (
     'mysite',
     'pure_pagination',
     'crispy_forms',
+    'jchat',
+    'documents',
     # 'south'
 )
 

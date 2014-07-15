@@ -7,6 +7,7 @@ from registration.backends.default.views import RegistrationView
 from mysite.forms import CustomRegForm, CustomAuthForm
 from django.contrib.auth import views as auth_view
 from blog import views
+from views import *
 
 # Uncomment the next two lines to enable the admin:
 admin.autodiscover()
@@ -29,6 +30,10 @@ urlpatterns = patterns('',
     url(r'^register/$', RegistrationView.as_view(form_class= CustomRegForm), name = 'register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^profile/', include('profile.urls', namespace="profile")),
+    url(r'^index$', index),
+    url(r'^simple$', simple),
+    url(r'^complex/(?P<id>\d)$', complex),
+    url(r'^chat/', include('jchat.urls', namespace="chat")),
 
 )
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
