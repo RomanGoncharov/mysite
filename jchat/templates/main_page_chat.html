@@ -5,8 +5,16 @@
 {% block title %}My chat!{% endblock %}
 
 {% block content %}
+    <form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+
     Rooms:
+    <br>
     {% for room in rooms %}
-        {{ room.id }}
+        <a href="{{ room.get_url }}">{{ room.name }}</a>
+        <br>
     {% endfor %}
 {% endblock %}

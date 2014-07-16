@@ -66,3 +66,31 @@
 #comment_name{
 
 }
+
+.center {
+	top: 50%; /* Отступ в процентах от верхнего края окна */
+	left: 50%; /* Отступ в процентах от левого края окна */
+	width: 450px; /* Ширина блока */
+	height: 450px; /* Высота блока */
+	position: absolute; /* Абсолютное позиционирование блока */
+	margin-top: -225px; /* Отрицательный отступ от верхнего края страницы, должен равняться половине высоты блока со знаком минус */
+	margin-left: -225px; /* Отрицательный отступ от левого края страницы, должен равняться половине высоты блока со знаком минус */
+}
+
+#chat{
+    width: 50%;
+}
+#chat-messages-container {
+	overflow: auto; /* used for scrolling */
+	/*width: 100%;*/
+	height: 300px;
+	border: 1px solid #777;
+	-moz-border-radius: 5px;
+    word-wrap:break-word;
+    background: #ffffff;
+}
+
+#chat-messages .author {
+    color: black;
+	font-weight: bold;
+}

@@ -19,6 +19,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType, ContentTypeManager 
 from django.contrib.contenttypes import generic 
 from datetime import datetime
+from django.core.urlresolvers import reverse
 
 
 class RoomManager(models.Manager):
@@ -27,11 +28,11 @@ class RoomManager(models.Manager):
     @see: http://docs.djangoproject.com/en/1.0/topics/db/managers/#topics-db-managers
     Also see GenericTypes from the contenttypes django app!
     @see: http://docs.djangoproject.com/en/1.0/ref/contrib/contenttypes/''' 
-    def create(self, object):
-        '''Creates a new chat room and registers it to the calling object'''
-        r = self.model(content_object=object)
-        r.save()
-        return r
+    # def create(self, object, name):
+    #     '''Creates a new chat room and registers it to the calling object'''
+    #     r = self.model(content_object=object, name=name)
+    #     r.save()
+    #     return r
         
     def get_for_object(self, object):
         '''Try to get a room related to the object passed.'''
@@ -50,6 +51,7 @@ class Room(models.Model):
     object_id = models.PositiveIntegerField(blank=True, null=True) # to which instace of the aforementioned object is this related
     content_object = generic.GenericForeignKey('content_type','object_id') # use both up, USE THIS WHEN INSTANCING THE MODEL
     created = models.DateTimeField(default=datetime.now())
+    name = models.CharField(max_length=25)
     comment = models.TextField(blank=True, null=True)
     objects = RoomManager() # custom manager
     
@@ -90,6 +92,9 @@ class Room(models.Model):
     
     def __unicode__(self):
         return 'Chat for %s %d' % (self.content_type, self.object_id)
+
+    def get_url(self):
+        return reverse("chat:room", args=[self.id])
     
     class Meta:
         unique_together = (("content_type", "object_id"),)

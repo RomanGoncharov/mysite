@@ -1,0 +1,35 @@
+{%  extends "base.html" %}
+{% block extensions %}
+    {% load static %}
+{% endblock %}
+{% block title %}My chat!{% endblock %}
+
+{% block content %}
+<h3>{{ room.name }}</h3>
+    {{ user.profile }} <img src="{{ user.get_profile.get_avatar_url }} " width="32" height="32">
+{#<div id="chat"></div>#}
+    <div class=" center well-lg panel panel-primary">
+        <div id="chat-messages-container" class="well-lg panel panel-primary">
+            <div id="chat-messages"> </div>
+            <div id="chat-last"> </div>
+        </div>
+
+        <form id="chat-form">
+            <div class="input-group">
+                <input name="message" type="text" class="message form-control"/>
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-default" value="Say!!!"/>
+                </span>
+            </div><!-- /input-group -->
+{#            <input name="message" type="text" class="message form-control"/>#}
+{#            <input type="submit" value="Say!!!"/>#}
+        </form>
+    </div>
+<!-- You should try to include this at another place at your convenience :D -->
+<script type="text/javascript" src="{% static 'js/jchat.js' %}"></script>
+<script type="text/javascript">
+$(window).ready(function(){
+	init_chat({{room.id}}, "chat");
+})
+</script>
+{% endblock %}

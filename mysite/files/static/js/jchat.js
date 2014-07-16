@@ -44,20 +44,11 @@ function sync_messages() {
  */
 function layout_and_bind(html_el_id) {
 		// layout stuff
-		var html = '<div id="chat-messages-container">'+
-		'<div id="chat-messages"> </div>'+
-		'<div id="chat-last"> </div>'+
-		'</div>'+
-		'<form id="chat-form">'+
-		'<input name="message" type="text" class="message" />'+
-		'<input type="submit" value="Say!!!"/>'+
-		'</form>';
-		
-		$("#"+html_el_id).append(html);
+
 		
 		// event stuff
     	$("#chat-form").submit( function () {
-            var $inputs = $(this).children('input');
+            var $inputs = $(this).find('input');
             var values = {};
             
             $inputs.each(function(i,el) { 
@@ -95,12 +86,22 @@ function get_messages() {
 
 			// add messages
 			$.each(json, function(i,m){
+                var avatar = '<img src="'+ m.avatar+'" width="32" height="32">'
 				if (m.type == 's')
-					$('#chat-messages').append('<div class="system">' + replace_emoticons(m.message) + '</div>');
-				else if (m.type == 'm') 	
-					$('#chat-messages').append('<div class="message"><div class="author">'+m.author+'</div>'+replace_emoticons(m.message) + '</div>');
+					$('#chat-messages').append('<div class="system">'+ replace_emoticons(m.message));
+				else if (m.type == 'm')
+                    $('#chat-messages').append(
+                                '<div class="media">'+
+                                   '<a class="pull-left" href="#">'+
+                                        '<img class="media-object" src="'+m.avatar+'" width="32" height="32">' +
+                                   '</a>'+
+                                    '<div class="media-body ">'+
+                                        '<div class="media-heading author">' + m.author +'</div>'+
+                                        replace_emoticons(m.message)+
+                                '</div></div>');
+//					$('#chat-messages').append('<div class="message">'+ avatar +'<div class="author">'+m.author+'</div>'+replace_emoticons(m.message) + '</div><div class="timestamp">'+ m.timestamp+'</div>');
 				else if (m.type == 'j') 	
-					$('#chat-messages').append('<div class="join">'+m.author+' has joined</div>');
+					$('#chat-messages').append('<div class="join">' +m.author+' has joined</div>');
 				else if (m.type == 'l') 	
 					$('#chat-messages').append('<div class="leave">'+m.author+' has left</div>');
 					

@@ -162,7 +162,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'jchat',
     'documents',
-    # 'south'
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging
